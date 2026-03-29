@@ -1,0 +1,56 @@
+﻿using System;
+
+public class Transport
+{
+    public string Model { get; set; }
+    protected int Speed;
+    public void ShowInfo()
+    {
+        Console.WriteLine($"Модель: {Model}, скорость: {Speed} км/ч");
+    }
+    public virtual void Move()
+    { 
+        Console.WriteLine("Транспорт движется");
+    }
+}
+
+public class Car : Transport
+{
+    public void Accelerate(int value)
+    {
+        if (value > 200)
+        {
+            Console.WriteLine("Слишком большая скорость!");
+        }
+        else
+        { 
+            Speed += value;
+        }
+    }
+    public override void Move() => Console.WriteLine("Машина едет по дороге");
+}
+
+public class Bicycle : Transport
+{
+    public void Pedal()
+    {
+        Speed += 5;
+    }
+    public override void Move() => Console.WriteLine("Велосипед крутит педали");
+}
+
+public class Program
+{
+    static void Main()
+    {
+        var car = new Car { Model = "Audi" };
+        car.Accelerate(100);
+        car.ShowInfo();
+        car.Move();
+
+        var bike = new Bicycle { Model = "Cube" };
+        bike.Pedal();
+        bike.ShowInfo();
+        bike.Move();
+    }
+}
